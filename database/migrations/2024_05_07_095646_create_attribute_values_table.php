@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('attribute_values', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('attribute_id')->constrained('attributes')->restrictOnDelete();
+            //category id
+            $table->foreignId('category_id')->constrained('categories')->restrictOnDelete();
+
+            $table->string('value');
             $table->timestamps();
         });
     }

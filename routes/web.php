@@ -29,5 +29,8 @@ Route::group(['namespace'=>'Backend','prefix'=>'company-backend','middleware'=>'
         Route::get('/',[UserController::class, 'index'])->name('users');
         Route::get('/user-profile',[UserController::class, 'profile'])->name('user-profile');
     });
+    Route::resource('manage-section', "\App\Http\Controllers\Backend|\Section\SectionController");
+    Route::resource('manage-category', "\App\Http\Controllers\Backend|\Category\CategoryController");
+
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
