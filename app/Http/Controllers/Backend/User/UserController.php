@@ -12,18 +12,20 @@ class UserController extends Controller
 
     public function index()
     {
-        $auth=auth()->user();
+        $auth = auth()->user();
         $role = $auth->role;
-        if($role!= 'admin'){
+        if ($role != 'admin') {
             return redirect()->route('dashboard');
-        } else{
-        $usersData = User::where('id', '!=', $auth->id)->get();
-        return view($this->pagePath. 'users.index', compact('usersData'));
+        } else {
+            $usersData = User::where('id', '!=', $auth->id)->get();
+            return view($this->pagePath . 'users.index', compact('usersData'));
+        }
     }
- }
 
- public function profile(){
 
-    return view($this->pagePath . 'users.user-profile');
- }
+    public  function  profile()
+    {
+
+        return view($this->pagePath . 'users.user-profile');
+    }
 }

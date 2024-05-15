@@ -10,21 +10,21 @@ class CategoryTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
+
         $categoryData = [
-            ['section_id'=>1, 'parent_id'=> null, 'name'=> "Clothing","slug"=>"clothing"],
-            ['section_id'=>1, 'parent_id'=> null, 'name'=> "Shoes","slug"=>"shoes"],
-            ['section_id'=>2, 'parent_id'=> null, 'name'=> "Makeup","slug"=>"makeup"],
-            ['section_id'=>2, 'parent_id'=> null, 'name'=> "Haircare","slug"=>"haircare"],
-            ['section_id'=>3, 'parent_id'=> null, 'name'=> "Tablets","slug"=>"tablets"],
+            ['section_id' => 1, 'parent_id' => null, 'category_name' => "Clothing","slug"=>"Clothing"],
+            ['section_id' => 3, 'parent_id' => null, 'category_name' => "Laptop","slug"=>"laptop"],
+
+
+
         ];
-        foreach ($categoryData as $data){
-            $find = Category::where('name', $data['name'])->first();
-            if(!$find) {
+
+        foreach ($categoryData as $data) {
+            $find = Category::where('category_name', $data['category_name'])->first();
+            if (!$find) {
                 Category::create($data);
             }
         }

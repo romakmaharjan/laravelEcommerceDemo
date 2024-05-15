@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
-    private $pagePath="frontend.pages.";
+    private $pagePath = "frontend.pages.";
+
     public function index()
     {
         return view($this->pagePath.'home.home');

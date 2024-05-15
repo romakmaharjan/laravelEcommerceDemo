@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1>Show Section</h1>
-                    @include('components.messages')
+                    @include('components.message')
                 </div>
                 <div class="col-md-12">
                     <table class="table">
