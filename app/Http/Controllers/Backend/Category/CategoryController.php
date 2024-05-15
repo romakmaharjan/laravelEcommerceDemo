@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend\Category;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Section;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,7 +17,7 @@ class CategoryController extends Controller
     private $pagePath = "backend.pages.";
     public function index()
     {
-        return view($this->pagePath . 'category.index');
+        return view($this->pagePath . 'category.index',compact('categoryData'));
     }
 
     /**
@@ -25,7 +27,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view($this->pagePath . 'category.create');
+         $sectionData = Section::all();
+        $parentCategory = Category::where('parent_id', null)->get();
+        $data['sectionData'] = $sectionData;
+        $data['categoryData'] = $parentCategory;
+        return view($this->pagePath . 'category.create',$data);
     }
 
     /**
@@ -36,7 +42,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'section_id' => 'required',
+            'category_name' => 'required',
+            'slug' => 'required|unique:categories'
+        ]);
+        $validation['parent_id'] = $request->parent_id ?? null;
+        Category::create($validation);
+        return redirect()->route('manage-category.index');
     }
 
     /**
